@@ -1,0 +1,47 @@
+<%= form_with(model: todo, local: true) do |form| %>
+  <% if todo.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(todo.errors.count, "error") %> prevented this ToDo from being saved:</h4>
+      <ul>
+        <% todo.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :completed %>
+    <%= form.check_box :completed, class: "form-check-input" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :due_date %>
+    <%= form.date_field :due_date, class: "form-control" %>
+  </div>
+
+
+  <div class="mb-3">
+    <%= form.label :priority %>
+    <%= form.select :priority, ['Low', 'Medium', 'High'], {}, class: "form-select" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :category_id, "Category" %>
+    <%= form.collection_select :category_id, current_user.categories, :id, :name, prompt: "Select Category", class: "form-select" %>
+  </div>
+
+  <div>
+    <%= form.submit "Save Todo", class: "btn btn-primary" %>
+  </div>
+<% end %>

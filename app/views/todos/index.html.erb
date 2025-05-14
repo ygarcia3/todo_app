@@ -1,0 +1,46 @@
+<% content_for :title, "Your ToDos" %>
+
+<%= form_with url: todos_path, method: :get, local: true, class: "mb-4" do %>
+  <div class="row g-2">
+    <div class="col-md-3">
+      <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "Search todos..." %>
+    </div>
+
+    <div class="col-md-3">
+      <%= select_tag :category_id,
+          options_from_collection_for_select(@categories, :id, :name, params[:category_id]),
+          prompt: "Filter by category",
+          class: "form-select" %>
+    </div>
+
+    <div class="col-md-3">
+      <%= select_tag :status,
+          options_for_select([["All", ""], ["Completed", "completed"], ["Pending", "pending"]], params[:status]),
+          prompt: "Filter by status",
+          class: "form-select" %>
+    </div>
+
+    <div class="col-md-3 d-flex gap-2">
+      <button class="btn btn-outline-primary flex-fill" type="submit">Apply</button>
+      <%= link_to "Reset", todos_path, class: "btn btn-outline-secondary flex-fill" %>
+    </div>
+  </div>
+<% end %>
+
+<h1 class="mb-4">My ToDos</h1>
+
+<% if notice %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end %>
+
+<% if @todos.empty? %>
+  <p>No todos yet. <%= link_to "Create one", new_todo_path %>.</p>
+<% else %>
+  <div class="row">
+    <% @todos.each do |todo| %>
+      <%= render partial: "todo", locals: { todo: todo } %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= link_to "New ToDo", new_todo_path, class: "btn btn-success" %>

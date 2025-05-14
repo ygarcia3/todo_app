@@ -1,0 +1,81 @@
+:root {
+    --primary: #2C3E50;
+    --accent: #3498DB;
+    --bg: #ece7e0;
+    --card-bg: #FFFFFF;
+    --muted: #7F8C8D;
+    --success: #2ECC71;
+    --danger: #E74C3C;
+  }
+  
+  body {
+    background-color: var(--bg);
+    color: var(--primary);
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+  
+  .navbar {
+    background-color: var(--primary) !important;
+  }
+  
+  .navbar .btn,
+  .navbar .nav-link {
+    color: white !important;
+  }
+  
+  .card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--muted);
+  }
+  .card:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  
+  .btn-primary {
+    background-color: var(--accent);
+    border-color: var(--accent);
+  }
+  
+  .btn-outline-light {
+    color: white;
+    border-color: white;
+  }
+  .btn-outline-primary {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: var(--accent);
+    color: white;
+  }
+  
+  
+  .alert-success {
+    background-color: var(--success);
+    color: white;
+  }
+  
+  .alert-danger {
+    background-color: var(--danger);
+    color: white;
+  }
+  .badge {
+    border-radius: 0.4rem;
+    padding: 0.5em 0.7em;
+  }
+  
+  .badge-priority-high {
+    background-color: var(--danger);
+  }
+  
+  .badge-priority-medium {
+    background-color: #F39C12;
+    color: black;
+  }
+  
+  .badge-priority-low {
+    background-color: #BDC3C7;
+  }
+  

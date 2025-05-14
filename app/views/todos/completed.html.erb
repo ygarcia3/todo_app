@@ -1,0 +1,10 @@
+<h1 class="mb-4">Completed ToDos ✅</h1>
+
+<% @todos.each do |todo| %>
+  <div class="card mb-3 border-success">
+    <div class="card-body">
+      <h5 class="card-title text-success"><%= todo.title %></h5>
+      <p class="card-text"><%= todo.description %></p>
+    </div>
+  </div>
+<% end %>

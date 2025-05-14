@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Todo App" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <!-- Font Awesome for icons -->
+    <%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" %>
+
+    <!-- Bootstrap & app styles -->
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
+
+    <%= javascript_importmap_tags %>
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+  </head>
+
+  <body class="pt-5">
+    <!-- Sticky Top Navbar -->
+    <nav class="navbar navbar-dark bg-dark fixed-top shadow-sm px-3">
+      <%= link_to root_path, class: "navbar-brand d-flex align-items-center" do %>
+        <i class="fas fa-tasks me-2"></i> Dashboard
+      <% end %>
+
+      <% if user_signed_in? %>
+        <div class="d-flex gap-2">
+          <%= link_to "ToDos", todos_path, class: "btn btn-outline-light" %>
+          <%= link_to "Categories", categories_path, class: "btn btn-outline-light" %>
+          <%= link_to "Completed", completed_todos_path, class: "btn btn-outline-light" %>
+          <%= link_to "My Account", edit_user_registration_path, class: "btn btn-outline-warning" %>
+          <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
+        </div>
+      <% else %>
+        <div class="d-flex gap-2">
+          <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light" %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </nav>
+
+    <!-- Flash Messages -->
+    <div class="container mt-4">
+      <% flash.each do |key, message| %>
+        <div class="alert alert-<%= key == "notice" ? "success" : "danger" %> alert-dismissible fade show" role="alert">
+          <%= message %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+  </body>
+</html>

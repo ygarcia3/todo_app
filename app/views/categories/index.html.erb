@@ -1,0 +1,33 @@
+<% content_for :title, "Categories" %>
+
+<h1 class="mb-4">My Categories</h1>
+
+<%= link_to "New Category", new_category_path, class: "btn btn-success mb-3" %>
+
+<% if @categories.empty? %>
+  <p>You haven’t created any categories yet.</p>
+<% else %>
+  <div class="row">
+    <% @categories.each do |category| %>
+      <div class="col-md-6 mb-3">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title d-flex justify-content-between align-items-center">
+              <i class="fas fa-folder-open me-2 text-secondary"></i>
+              <%= category.name %>
+              <span class="badge bg-primary">
+                <%= category.todos.count %> ToDos
+              </span>
+            </h5>
+
+            <div class="d-flex gap-2">
+              <%= link_to "View", category_path(category), class: "btn btn-sm btn-outline-primary" %>
+              <%= link_to "Edit", edit_category_path(category), class: "btn btn-sm btn-outline-secondary" %>
+              <%= link_to "Delete", category_path(category), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
